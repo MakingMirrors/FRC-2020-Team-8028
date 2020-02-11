@@ -7,16 +7,26 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
-public class ArmClimber extends SubsystemBase {
-  private PWMVictorSPX conveyor = new PWMVictorSPX(Constants.CONVEYORPORT);
+public class Index extends SubsystemBase {
+  DoubleSolenoid DSOL = new DoubleSolenoid(2, 3);
 
-  public void setConveyor(double speed){
-    conveyor.set(speed);
+
+  public void ActivateSoleniod(){
+    DSOL.set(Value.kForward);
   }
+
+  public void ReverseSolenoid(){
+    DSOL.set(Value.kReverse);
+  }
+  
+  public void CloseSolenoid(){
+    DSOL.set(Value.kOff);
+  }
+  
 
   @Override
   public void periodic() {

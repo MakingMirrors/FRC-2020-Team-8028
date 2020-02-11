@@ -7,16 +7,31 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
-public class ArmClimber extends SubsystemBase {
-  private PWMVictorSPX conveyor = new PWMVictorSPX(Constants.CONVEYORPORT);
+public class CompressorStates extends SubsystemBase {
+  Compressor m_Compressor = new Compressor();
 
-  public void setConveyor(double speed){
-    conveyor.set(speed);
+  public void StartCompressor(){
+    m_Compressor.start();
+    m_Compressor.setClosedLoopControl(true);
   }
+
+  public boolean GetCompressorState(){
+    boolean state = m_Compressor.enabled();
+    return state;
+  } 
+
+  public double GetCompressorCurrent(){
+    double current = m_Compressor.getCompressorCurrent();
+    return current;
+  }
+
+  public boolean PressureSwitchValue(){
+    boolean state = m_Compressor.getPressureSwitchValue();
+    return state;
+  } 
 
   @Override
   public void periodic() {
