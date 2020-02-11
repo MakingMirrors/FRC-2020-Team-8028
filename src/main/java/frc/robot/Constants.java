@@ -22,8 +22,9 @@ public final class Constants {
     //PWM Ports
     public static final int LEFTMOTORCONTROLLER = 0;
     public static final int RIGHTMOTORCONTROLLER = 1;
-    public static final int SPINNER_PORT = 3;
     public static final int CONVEYORPORT = 2;
+    public static final int SPINNER_PORT = 3;
+    public static final int BALLPICKUP_PORT = 4;
 
     //Controller Ports
     public static final int CONTROLPORT1 = 0;
@@ -34,4 +35,5 @@ public final class Constants {
     public static final double AUTOSPEED = 1.0;
     public static final double LOCATION_X = 0.0;
 	public static final double TURNSPEED = 1.0;
+	public static final Double BALLPICKUP_SPEED = 0.7;
 }
