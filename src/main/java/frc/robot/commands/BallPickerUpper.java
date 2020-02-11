@@ -7,37 +7,33 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ArmClimber;
+import frc.robot.Constants;
+import frc.robot.subsystems.BallPickUp;
 
-public class StartComp extends CommandBase {
-  private final ArmClimber m_ArmClimber;
-
-  public StartComp(ArmClimber subsystem){
-    m_ArmClimber = subsystem;
-    addRequirements(m_ArmClimber);
+public class BallPickerUpper extends CommandBase {
+  BallPickUp BallPickUp;
+  public BallPickerUpper(BallPickUp m_BallPickUp) {
+    BallPickUp = m_BallPickUp;
+    addRequirements(m_BallPickUp);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_ArmClimber.StartCompressor();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("Compressor Working", m_ArmClimber.GetCompressorState());
-    SmartDashboard.putBoolean("Pressure Switch Value", m_ArmClimber.PressureSwitchValue());
-    SmartDashboard.putNumber("Compressor Current", m_ArmClimber.GetCompressorCurrent());
+    BallPickUp.setPickupSpeed(Constants.BALLPICKUP_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    BallPickUp.setPickupSpeed(0.0);
   }
-
 
   // Returns true when the command should end.
   @Override

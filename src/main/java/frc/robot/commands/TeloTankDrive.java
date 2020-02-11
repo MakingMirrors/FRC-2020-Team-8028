@@ -34,14 +34,9 @@ public class TeloTankDrive extends CommandBase {
     double turn;
     double l_stick = m_controller.getRawAxis(1);
     double r_stick = m_controller.getRawAxis(4);
+    turn = r_stick;
     if (java.lang.Math.abs(l_stick) < 0.1){
       l_stick = 0;
-      //turn = r_stick / 2.5;
-      turn = r_stick;
-    }
-    else{
-      //turn = r_stick/ 3;
-      turn = r_stick;
     }
 
     double speed = -l_stick * java.lang.Math.abs(l_stick) * java.lang.Math.abs(l_stick) * java.lang.Math.abs(l_stick);

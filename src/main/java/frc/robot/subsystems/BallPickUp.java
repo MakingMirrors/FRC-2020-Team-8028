@@ -7,11 +7,15 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class BallPickUp extends SubsystemBase {
-  public BallPickUp() {
-
+  PWMVictorSPX ballPickUp = new PWMVictorSPX(Constants.BALLPICKUP_PORT);
+  
+  public void setPickupSpeed(Double speed) {
+    ballPickUp.set(speed);
   }
 
   @Override
