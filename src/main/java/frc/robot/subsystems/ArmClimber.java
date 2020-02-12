@@ -7,51 +7,15 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class ArmClimber extends SubsystemBase {
-  Compressor Arm = new Compressor();
-  DoubleSolenoid DSOL = new DoubleSolenoid(0, 1);
+  private PWMVictorSPX conveyor = new PWMVictorSPX(Constants.CONVEYORPORT);
 
-
-  public void StartCompressor(){
-    Arm.start();
-    Arm.setClosedLoopControl(true);
-    DSOL.set(Value.kOff);
-  }
-
-  public boolean GetCompressorState(){
-    boolean state = Arm.enabled();
-    return state;
-  } 
-
-  public double GetCompressorCurrent(){
-    double current = Arm.getCompressorCurrent();
-    return current;
-  }
-
-  public boolean PressureSwitchValue(){
-    boolean state = Arm.getPressureSwitchValue();
-    return state;
-  } 
-
-  public void ActivateSoleniod(){
-    DSOL.set(Value.kForward);
-  }
-
-  public void ReverseSolenoid(){
-    DSOL.set(Value.kReverse);
-  }
-  
-  public void CloseSolenoid(){
-    DSOL.set(Value.kOff);
-  }
-  
-  public void StopCompressor(){
-    Arm.stop();
+  public void setConveyor(double speed){
+    conveyor.set(speed);
   }
 
   @Override
