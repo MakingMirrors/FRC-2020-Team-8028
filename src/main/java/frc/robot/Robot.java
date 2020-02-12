@@ -22,15 +22,13 @@ public class Robot extends TimedRobot {
   private final Timer m_timer1 = new Timer();
   private RobotContainer m_robotContainer;
 
-  private Command m_autoTankDrive;
-  private Command m_TeloTankDrive;
-  //private Command m_AutoColorSpin;
-  //private Command m_StartComp;
-  //private Command m_ActivateArm;
-  //private Command m_ReverseArm;
-  private Command m_AutoTurn;
-  //private Command m_GetNavXData;
-  //private Command m_RunConveyor;
+  private Command m_autoTankDrive = m_robotContainer.AutoTankDrive();
+  private Command m_TeloTankDrive = m_robotContainer.TeloTankDrive();
+  private Command m_StartComp = m_robotContainer.StartComp();
+  private Command m_AutoTurn = m_robotContainer.AutoTurn();
+  private Command m_RunConveyor = m_robotContainer.RunConveyor();
+  private Command m_IndexOn = m_robotContainer.IndexOff();
+  private Command m_IndexOff = m_robotContainer.IndexOff();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -78,19 +76,9 @@ public class Robot extends TimedRobot {
     m_timer1.reset();
     m_timer1.start();
 
-    m_autoTankDrive = m_robotContainer.getAutoTankDrive();
-    //m_AutoColorSpin = m_robotContainer.getAutoSpin();
-    //m_StartComp = m_robotContainer.getCompStart();
-    //m_ActivateArm = m_robotContainer.ActivateArm();
-    //m_ReverseArm = m_robotContainer.ReverseArm();
-    m_AutoTurn = m_robotContainer.AutoTurn();
-    //m_RunConveyor = m_robotContainer.RunConveyor();
-    //m_GetNavXData = m_robotContainer.GetNavXData();
-
-    //m_RunConveyor.schedule();
-    //m_StartComp.schedule();
-    //m_AutoColorSpin.schedule();
-    //m_GetNavXData.schedule();
+    m_RunConveyor.schedule();
+    m_StartComp.schedule();
+    m_IndexOn.schedule();
   }
 
   /**
@@ -112,13 +100,14 @@ public class Robot extends TimedRobot {
    
    if (m_timer1.get() > 3.8){
      m_autoTankDrive.cancel();
+     m_IndexOff.schedule();
    }
   }
 
   @Override
   public void teleopInit() {
-    m_TeloTankDrive = m_robotContainer.getTeloCommand();
     m_TeloTankDrive.schedule();
+    m_StartComp.schedule();
   }
 
   /**
@@ -126,7 +115,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    
   }
 
   @Override

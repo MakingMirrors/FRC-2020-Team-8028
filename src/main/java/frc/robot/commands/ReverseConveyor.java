@@ -8,14 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.BallPickUp;
+import frc.robot.subsystems.ConveyorBelt;
 
-public class BallPickerUpper extends CommandBase {
-  BallPickUp BallPickUp;
-  public BallPickerUpper(BallPickUp m_BallPickUp) {
-    BallPickUp = m_BallPickUp;
-    addRequirements(m_BallPickUp);
+public class ReverseConveyor extends CommandBase {
+  private final ConveyorBelt m_ConveyorBelt;
+  public ReverseConveyor(ConveyorBelt subsystem) {
+    m_ConveyorBelt = subsystem;
+    addRequirements(m_ConveyorBelt);
   }
 
   // Called when the command is initially scheduled.
@@ -26,13 +25,13 @@ public class BallPickerUpper extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    BallPickUp.setPickupSpeed(Constants.BALLPICKUP_SPEED);
+    m_ConveyorBelt.setConveyor(-1);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    BallPickUp.setPickupSpeed(0.0);
+    m_ConveyorBelt.setConveyor(0.0);
   }
 
   // Returns true when the command should end.

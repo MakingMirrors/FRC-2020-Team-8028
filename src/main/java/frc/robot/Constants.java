@@ -24,7 +24,7 @@ public final class Constants {
     public static final int RIGHTMOTORCONTROLLER = 1;
     public static final int CONVEYORPORT = 2;
     public static final int SPINNER_PORT = 3;
-    public static final int BALLPICKUP_PORT = 4;
+	public static final int BALLPICKUP_PORT = 4;
 
     //Controller Ports
     public static final int CONTROLPORT1 = 0;
