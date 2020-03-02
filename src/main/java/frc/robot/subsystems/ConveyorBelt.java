@@ -15,7 +15,7 @@ public class ConveyorBelt extends SubsystemBase {
   private PWMVictorSPX conveyor = new PWMVictorSPX(Constants.CONVEYORPORT);
 
   public void setConveyor(double speed){
-    conveyor.set(speed);
+    conveyor.set(-speed);
   }
 
   @Override

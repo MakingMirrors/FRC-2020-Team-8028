@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -19,16 +20,19 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-  private final Timer m_timer1 = new Timer();
   private RobotContainer m_robotContainer;
+  private final Timer m_timer1 = new Timer();
 
-  private Command m_autoTankDrive = m_robotContainer.AutoTankDrive();
-  private Command m_TeloTankDrive = m_robotContainer.TeloTankDrive();
-  private Command m_StartComp = m_robotContainer.StartComp();
-  private Command m_AutoTurn = m_robotContainer.AutoTurn();
-  private Command m_RunConveyor = m_robotContainer.RunConveyor();
-  private Command m_IndexOn = m_robotContainer.IndexOff();
-  private Command m_IndexOff = m_robotContainer.IndexOff();
+  private Command m_autoTankDrive;
+  private Command m_TeloTankDrive;
+  private Command m_StartComp;
+  private Command m_AutoTurn;
+  private Command m_AutoReverseTurn;
+  private Command m_RunConveyor;
+  //private Command m_IndexOn;
+  //private Command m_IndexOff;
+  private Command m_IntakeDeploy;
+  //private Command m_BallPickerUpper;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -36,9 +40,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
+    // Instantiate our RobotContainer
     m_robotContainer = new RobotContainer();
+    CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
@@ -69,16 +73,24 @@ public class Robot extends TimedRobot {
   }
 
   /**
-   * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
+   * This autonomous runs the autonomous command selected by your {@link RobotContainer} class. a child has fell into a river in lego city
    */
   @Override
   public void autonomousInit() {
     m_timer1.reset();
     m_timer1.start();
 
-    m_RunConveyor.schedule();
+    m_AutoTurn = m_robotContainer.AutoTurn();
+    m_autoTankDrive = m_robotContainer.AutoTankDrive();
+    m_AutoReverseTurn = m_robotContainer.AutoReverseTurn();
+    m_StartComp = m_robotContainer.StartComp();
+    m_RunConveyor = m_robotContainer.RunConveyor();
+    //m_IndexOn = m_robotContainer.IndexOn();
+    //m_IndexOff = m_robotContainer.IndexOff();
+    m_IntakeDeploy = m_robotContainer.IntakeDeploy();
+
     m_StartComp.schedule();
-    m_IndexOn.schedule();
+    m_IntakeDeploy.schedule();
   }
 
   /**
@@ -86,28 +98,41 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-   if (m_timer1.get() < 0.65){
-    m_AutoTurn.schedule();
-   }
-   if (m_timer1.get() > 0.65){
-    m_AutoTurn.cancel();
-   }
-
-   if((m_timer1.get() > 3.6) && (m_timer1.get() < 3.8)){
+    if (m_timer1.get() < Constants.TURNTIME){
+     m_AutoTurn.schedule();
+    }
+    if ((m_timer1.get() > Constants.TURNTIME) && (m_timer1.get() < Constants.FORWARDTIME)){
      m_AutoTurn.cancel();
      m_autoTankDrive.schedule();
-   }
-   
-   if (m_timer1.get() > 3.8){
+    }
+ 
+    if(m_timer1.get() > Constants.FORWARDTIME && m_timer1.get() < Constants.PAUSETIME){
+      m_autoTankDrive.cancel();
+    }
+    
+    if(m_timer1.get() > Constants.PAUSETIME && m_timer1.get() < Constants.REVERSEAUTOTURN){
+     m_AutoReverseTurn.schedule();
+    }
+ 
+    if(m_timer1.get() > Constants.REVERSEAUTOTURN && m_timer1.get() < Constants.FINALFORWARD){
+      m_AutoReverseTurn.cancel();
+      m_autoTankDrive.schedule();
+    }
+ 
+    if(m_timer1.get() > Constants.FINALFORWARD){
      m_autoTankDrive.cancel();
-     m_IndexOff.schedule();
+    }
    }
-  }
+ 
+ 
+
 
   @Override
   public void teleopInit() {
+    m_TeloTankDrive = m_robotContainer.TeloTankDrive();
     m_TeloTankDrive.schedule();
-    m_StartComp.schedule();
+    m_RunConveyor = m_robotContainer.RunConveyor();
+    m_RunConveyor.schedule();
   }
 
   /**

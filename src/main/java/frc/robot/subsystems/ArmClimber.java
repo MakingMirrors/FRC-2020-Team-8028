@@ -12,10 +12,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ArmClimber extends SubsystemBase {
-  private PWMVictorSPX conveyor = new PWMVictorSPX(Constants.CONVEYORPORT);
+  private PWMVictorSPX motor1 = new PWMVictorSPX(Constants.ARMCLIMBER1);
 
-  public void setConveyor(double speed){
-    conveyor.set(speed);
+  public void setMotor(double speed){
+    motor1.set(speed);
   }
 
   @Override

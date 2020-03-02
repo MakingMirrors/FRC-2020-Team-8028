@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveBase;
 
-public class TeloTankDrive extends CommandBase {
+public class TeloTankDriveReverse extends CommandBase {
   private final DriveBase m_TeloDriveBase;
   private final Joystick m_controller;
   
-  public TeloTankDrive(DriveBase subsystem, Joystick controller){
+  public TeloTankDriveReverse(DriveBase subsystem, Joystick controller){
     m_TeloDriveBase = subsystem;
     m_controller = controller;
     addRequirements(m_TeloDriveBase);
@@ -32,13 +32,13 @@ public class TeloTankDrive extends CommandBase {
   @Override
   public void execute() {
     double turn;
-    double l_stick = m_controller.getRawAxis(1);
-    double r_stick = m_controller.getRawAxis(4);
+    double l_stick = -m_controller.getRawAxis(1);
+    double r_stick = -m_controller.getRawAxis(4);
     if (java.lang.Math.abs(l_stick) < 0.1){
       l_stick = 0;
     }
 
-    turn = r_stick;
+    turn = -r_stick;
 
     double speed = -l_stick * java.lang.Math.abs(l_stick) * java.lang.Math.abs(l_stick) * java.lang.Math.abs(l_stick);
     SmartDashboard.putNumber("Speed Value: ", speed);

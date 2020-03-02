@@ -19,12 +19,17 @@ public final class Constants {
     //Start States
 
     //CAN BUS Ports
+
     //PWM Ports
-    public static final int LEFTMOTORCONTROLLER = 0;
-    public static final int RIGHTMOTORCONTROLLER = 1;
-    public static final int CONVEYORPORT = 2;
-    public static final int SPINNER_PORT = 3;
-	public static final int BALLPICKUP_PORT = 4;
+    public static final int LEFTMOTORCONTROLLER0 = 0;
+    public static final int LEFTMOTORCONTROLLER1 = 1;
+    public static final int RIGHTMOTORCONTROLLER2 = 2;
+    public static final int RIGHTMOTORCONTROLLER3 = 3;
+    public static final int ARMCLIMBER1 = 5;
+    public static final int CONVEYORPORT = 6;
+	public static final int BALLPICKUP_PORT = 7;
+
+    
 
     //Controller Ports
     public static final int CONTROLPORT1 = 0;
@@ -32,8 +37,15 @@ public final class Constants {
 
     //Speed Constants
     public static final double SPINNER_SPEED = 0.0;
-    public static final double AUTOSPEED = 1.0;
-    public static final double LOCATION_X = 0.0;
+    public static final double AUTOSPEED = 0.7;
 	public static final double TURNSPEED = 1.0;
-	public static final Double BALLPICKUP_SPEED = 0.7;
+    public static final Double BALLPICKUP_SPEED = 1.0;
+    
+    //Autonomous Timings
+	public static final double TURNTIME = 0.14;
+    public static final double FORWARDTIME = TURNTIME + 0.85;
+    public static final double PAUSETIME = FORWARDTIME + .10;
+	public static final double REVERSEAUTOTURN = PAUSETIME + .14;
+	public static final double FINALFORWARD = REVERSEAUTOTURN + .05;
+
 }

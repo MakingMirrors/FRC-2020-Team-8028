@@ -29,7 +29,7 @@ public class TankDrive extends CommandBase {
   @Override
   public void execute() {
       m_DriveBase.setLeftSide(Constants.AUTOSPEED);
-      m_DriveBase.setRightSide(Constants.AUTOSPEED);
+      m_DriveBase.setRightSide(-Constants.AUTOSPEED);
   }
 
   // Called once the command ends or is interrupted.

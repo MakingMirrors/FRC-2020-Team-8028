@@ -14,7 +14,7 @@ import frc.robot.Constants;
 public class BallPickUp extends SubsystemBase {
   PWMVictorSPX ballPickUp = new PWMVictorSPX(Constants.BALLPICKUP_PORT);
   
-  public void setPickupSpeed(Double speed) {
+  public void setPickupSpeed(double speed) {
     ballPickUp.set(speed);
   }
 
