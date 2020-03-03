@@ -10,9 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ConveyorBelt;
 
-public class RunConveyor extends CommandBase {
+public class ReverseConveyor extends CommandBase {
   private final ConveyorBelt m_ConveyorBelt;
-  public RunConveyor(ConveyorBelt subsystem) {
+  public ReverseConveyor(ConveyorBelt subsystem) {
     m_ConveyorBelt = subsystem;
     addRequirements(m_ConveyorBelt);
   }

@@ -13,16 +13,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveBase extends SubsystemBase {
-    private PWMVictorSPX leftSide = new PWMVictorSPX(Constants.LEFTMOTORCONTROLLER);
-    private PWMVictorSPX rightSide = new PWMVictorSPX(Constants.RIGHTMOTORCONTROLLER);
+    private PWMVictorSPX leftSide1 = new PWMVictorSPX(Constants.LEFTMOTORCONTROLLER0);
+    private PWMVictorSPX leftSide2 = new PWMVictorSPX(Constants.LEFTMOTORCONTROLLER1);
+
+    private PWMVictorSPX rightSide1 = new PWMVictorSPX(Constants.RIGHTMOTORCONTROLLER2);
+    private PWMVictorSPX rightSide2 = new PWMVictorSPX(Constants.RIGHTMOTORCONTROLLER3);
   
 
   public void setLeftSide(double speed){
-    leftSide.set(speed);
+    leftSide1.set(speed);
+    leftSide2.set(speed);
   }
 
   public void setRightSide(double speed){
-    rightSide.set(-speed);
+    rightSide1.set(-speed);
+    rightSide2.set(-speed);
   }
 
   @Override

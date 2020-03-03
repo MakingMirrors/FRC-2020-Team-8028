@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakePne extends SubsystemBase {
-  DoubleSolenoid DSOL = new DoubleSolenoid(0, 1);
+  DoubleSolenoid DSOL = new DoubleSolenoid(2, 3);
 
 
   public void ActivateSoleniod(){

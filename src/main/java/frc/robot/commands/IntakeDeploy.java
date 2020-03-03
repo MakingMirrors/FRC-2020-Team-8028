@@ -8,13 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ConveyorBelt;
+import frc.robot.subsystems.IntakePne;
 
-public class RunConveyor extends CommandBase {
-  private final ConveyorBelt m_ConveyorBelt;
-  public RunConveyor(ConveyorBelt subsystem) {
-    m_ConveyorBelt = subsystem;
-    addRequirements(m_ConveyorBelt);
+public class IntakeDeploy extends CommandBase {
+  private final IntakePne m_IntakePne;
+
+  public IntakeDeploy(IntakePne subsystem) {
+    m_IntakePne = subsystem;
+    addRequirements(m_IntakePne);
   }
 
   // Called when the command is initially scheduled.
@@ -25,13 +26,12 @@ public class RunConveyor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_ConveyorBelt.setConveyor(-1);
+    m_IntakePne.ActivateSoleniod();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_ConveyorBelt.setConveyor(0.0);
   }
 
   // Returns true when the command should end.
